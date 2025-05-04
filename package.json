@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "next build && touch out/.nojekyll",
     "start": "next start",
     "lint": "next lint"
   },
