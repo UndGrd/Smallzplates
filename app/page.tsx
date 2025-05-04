@@ -1,20 +1,23 @@
 "use client"
 
+import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import { ClientOnly } from "@/components/ui-wrapper"
-import Header from "@/components/header"
-import OurStory from "@/components/our-story"
-import Banner from "@/components/banner"
-import Menu from "@/components/menu"
-import Gallery from "@/components/gallery"
-import Reservations from "@/components/reservations"
-import Contact from "@/components/contact"
-import Footer from "@/components/footer"
-import ParallaxGallery from "@/components/parallax-gallery"
-import ImmersiveSlider from "@/components/immersive-slider"
-import StickySection from "@/components/sticky-section"
-import TextAnimation from "@/components/text-animation"
-import DevicePreview from "@/components/device-preview"
-import ScrollSection from "@/components/scroll-section"
+
+// Dynamically import components with no SSR
+const Header = dynamic(() => import('@/components/header'), { ssr: false })
+const OurStory = dynamic(() => import('@/components/our-story'), { ssr: false })
+const Banner = dynamic(() => import('@/components/banner'), { ssr: false })
+const Menu = dynamic(() => import('@/components/menu'), { ssr: false })
+const Gallery = dynamic(() => import('@/components/gallery'), { ssr: false })
+const Reservations = dynamic(() => import('@/components/reservations'), { ssr: false })
+const Contact = dynamic(() => import('@/components/contact'), { ssr: false })
+const Footer = dynamic(() => import('@/components/footer'), { ssr: false })
+const ImmersiveSlider = dynamic(() => import('@/components/immersive-slider'), { ssr: false })
+const StickySection = dynamic(() => import('@/components/sticky-section'), { ssr: false })
+const TextAnimation = dynamic(() => import('@/components/text-animation'), { ssr: false })
+const DevicePreview = dynamic(() => import('@/components/device-preview'), { ssr: false })
+const ScrollSection = dynamic(() => import('@/components/scroll-section'), { ssr: false })
 
 // Updated with the actual food, cocktail, and atmosphere images
 const featuredImages = [
@@ -90,6 +93,18 @@ const stickyItems = [
 ]
 
 export default function Home() {
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [])
+
+  if (!isLoaded) {
+    return <div className="h-screen bg-black flex items-center justify-center">
+      <p className="text-white text-2xl">Loading Smallz Plates...</p>
+    </div>
+  }
+
   return (
     <ClientOnly>
       <main>
