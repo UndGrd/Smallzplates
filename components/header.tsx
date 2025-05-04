@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 
@@ -8,8 +9,11 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("welcome")
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
+    
     const handleScroll = () => {
       // Handle header background change on scroll
       if (window.scrollY > 50) {
@@ -19,22 +23,26 @@ export default function Header() {
       }
 
       // Handle active section detection
-      const sections = document.querySelectorAll("section[id]")
-      const scrollPosition = window.scrollY + 100 // Offset for better detection
+      if (typeof document !== 'undefined') {
+        const sections = document.querySelectorAll("section[id]")
+        const scrollPosition = window.scrollY + 100 // Offset for better detection
 
-      sections.forEach((section) => {
-        const sectionId = section.getAttribute("id") || ""
-        const sectionTop = (section as HTMLElement).offsetTop
-        const sectionHeight = (section as HTMLElement).offsetHeight
+        sections.forEach((section) => {
+          const sectionId = section.getAttribute("id") || ""
+          const sectionTop = (section as HTMLElement).offsetTop
+          const sectionHeight = (section as HTMLElement).offsetHeight
 
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          setActiveSection(sectionId)
-        }
-      })
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            setActiveSection(sectionId)
+          }
+        })
+      }
     }
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    if (typeof window !== 'undefined') {
+      window.addEventListener("scroll", handleScroll)
+      return () => window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   const toggleMenu = () => {
@@ -43,7 +51,9 @@ export default function Header() {
 
   const initOpenTable = () => {
     // OpenTable widget initialization would go here
-    window.open("https://www.opentable.com/restref/client/?rid=RESTAURANT_ID", "_blank")
+    if (typeof window !== 'undefined') {
+      window.open("https://www.opentable.com/restref/client/?rid=RESTAURANT_ID", "_blank")
+    }
   }
 
   const handleNavClick = (sectionId: string) => {
@@ -51,10 +61,17 @@ export default function Header() {
     setIsOpen(false)
 
     // Smooth scroll to section
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+    if (typeof document !== 'undefined') {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" })
+      }
     }
+  }
+
+  if (!isMounted) {
+    // Return a simple placeholder while on server or during hydration
+    return <header className="fixed top-0 left-0 w-full z-50 bg-black bg-opacity-95 py-2"></header>
   }
 
   return (

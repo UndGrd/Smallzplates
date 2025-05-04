@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  overflow-x: hidden;
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 md:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .heading-xl {
+    @apply font-cormorant text-4xl md:text-5xl lg:text-6xl font-light;
+  }
+
+  .heading-lg {
+    @apply font-cormorant text-3xl md:text-4xl font-light;
+  }
+
+  .heading-md {
+    @apply font-cormorant text-2xl md:text-3xl font-light;
+  }
+
+  .btn {
+    @apply px-6 py-3 font-light transition-all duration-300 tracking-wider;
+  }
+
+  .btn-primary {
+    @apply bg-gold text-black hover:bg-opacity-90;
+  }
+
+  .btn-outline {
+    @apply border border-gold text-gold hover:bg-gold hover:text-black;
+  }
+
+  .nav-link {
+    @apply text-white hover:text-gold transition-colors font-light;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .nav-link-mobile {
+    @apply text-white hover:text-gold transition-colors font-light;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.8s ease-out forwards;
+}
+
+/* Accessibility */
+@supports (font: -apple-system-body) and (-webkit-appearance: none) {
+  img[loading="lazy"] {
+    clip-path: inset(0.6px);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Responsive design helpers */
+.mobile-only {
+  @apply block md:hidden;
+}
+
+.desktop-only {
+  @apply hidden md:block;
+}

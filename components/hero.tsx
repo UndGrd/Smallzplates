@@ -12,6 +12,7 @@ export default function Hero() {
     threshold: 0.1,
     triggerOnce: true,
   })
+  const [isMounted, setIsMounted] = useState(false)
 
   // Geo-aware CTA function
   const handleCTAClick = () => {
@@ -20,7 +21,7 @@ export default function Hero() {
 
     if (userIsNearby && window.innerWidth < 768) {
       // If user is on mobile and nearby, scroll to phone tap link
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+      scrollToContact()
     } else {
       // Otherwise, open OpenTable modal
       window.open("https://www.opentable.com/restref/client/?rid=RESTAURANT_ID", "_blank")
@@ -70,6 +71,16 @@ export default function Hero() {
       }
     }
   }, [inView])
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const scrollToContact = () => {
+    if (typeof document !== 'undefined') {
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+    }
+  }
 
   return (
     <section id="welcome" className="relative h-screen flex items-center justify-center overflow-hidden">
