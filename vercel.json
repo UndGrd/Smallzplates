@@ -1,5 +1,4 @@
 {
-  "buildCommand": "node build-static.js",
-  "outputDirectory": "out",
-  "framework": null
+  "version": 2,
+  "public": true
 } 
