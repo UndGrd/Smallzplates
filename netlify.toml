@@ -1,0 +1,3 @@
+[build]
+  publish = "out"
+  command = "node build-static.js" 
