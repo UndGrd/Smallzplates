@@ -7,7 +7,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: process.env.NODE_ENV === 'development',
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -20,9 +20,10 @@ const nextConfig = {
     ],
   },
   experimental: {
-    allowedDevOrigins: ['localhost', '192.168.1.107'],
+    appDir: true,
   },
-  output: 'standalone',
+  output: 'export',
+  reactStrictMode: true,
 }
 
 export default nextConfig
