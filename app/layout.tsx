@@ -13,7 +13,7 @@ const cormorant = Cormorant({
 export const metadata: Metadata = {
   title: "Smallz Plates | Custom Plates and Craft Cocktails",
   description: "Experience custom plates and craft cocktails at Smallz Plates.",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({

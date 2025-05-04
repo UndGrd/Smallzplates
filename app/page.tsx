@@ -1,3 +1,6 @@
+"use client"
+
+import { ClientOnly } from "@/components/ui-wrapper"
 import Header from "@/components/header"
 import OurStory from "@/components/our-story"
 import Banner from "@/components/banner"
@@ -88,81 +91,83 @@ const stickyItems = [
 
 export default function Home() {
   return (
-    <main>
-      <Header />
+    <ClientOnly>
+      <main>
+        <Header />
 
-      {/* Hero replaced with Immersive Slider */}
-      <section id="welcome">
-        <ImmersiveSlider slides={immersiveSlides} />
-      </section>
+        {/* Hero replaced with Immersive Slider */}
+        <section id="welcome">
+          <ImmersiveSlider slides={immersiveSlides} />
+        </section>
 
-      <div className="py-16 bg-black">
-        <div className="container-custom">
-          <h2 className="heading-lg text-gold mb-8 text-center font-light">
-            <TextAnimation text="Welcome to Smallz Plates" type="reveal" />
-          </h2>
-          <p className="text-xl max-w-3xl mx-auto text-center font-light">
-            <TextAnimation
-              text="Experience culinary artistry and handcrafted cocktails in an unforgettable atmosphere. Our passion for quality ingredients and innovative techniques creates a dining experience like no other."
-              type="fade"
-              delay={500}
-            />
-          </p>
-        </div>
-      </div>
-
-      {/* Featured Images Scroll Section */}
-      <ScrollSection images={featuredImages} />
-
-      {/* Device Preview Section */}
-      <DevicePreview title="Responsive Design Preview">
-        <div className="p-4 bg-black min-h-full">
-          <h3 className="text-2xl font-cormorant font-light text-gold mb-4">Smallz Plates Menu</h3>
-          <p className="mb-6 font-light">Experience our seasonal menu items on any device.</p>
-
-          <div className="grid grid-cols-1 gap-4">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="border border-gold/20 p-4 rounded-lg">
-                <h4 className="text-lg font-light mb-2">Signature Dish {item}</h4>
-                <p className="text-gray font-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <p className="text-gold mt-2 font-light">$24</p>
-              </div>
-            ))}
+        <div className="py-16 bg-black">
+          <div className="container-custom">
+            <h2 className="heading-lg text-gold mb-8 text-center font-light">
+              <TextAnimation text="Welcome to Smallz Plates" type="reveal" />
+            </h2>
+            <p className="text-xl max-w-3xl mx-auto text-center font-light">
+              <TextAnimation
+                text="Experience culinary artistry and handcrafted cocktails in an unforgettable atmosphere. Our passion for quality ingredients and innovative techniques creates a dining experience like no other."
+                type="fade"
+                delay={500}
+              />
+            </p>
           </div>
         </div>
-      </DevicePreview>
 
-      <OurStory />
+        {/* Featured Images Scroll Section */}
+        <ScrollSection images={featuredImages} />
 
-      <Banner
-        title="Fresh Ingredients, Exceptional Flavors"
-        image="/placeholder.svg?height=800&width=1600"
-        alt="Fresh ingredients on a wooden table"
-      />
+        {/* Device Preview Section */}
+        <DevicePreview title="Responsive Design Preview">
+          <div className="p-4 bg-black min-h-full">
+            <h3 className="text-2xl font-cormorant font-light text-gold mb-4">Smallz Plates Menu</h3>
+            <p className="mb-6 font-light">Experience our seasonal menu items on any device.</p>
 
-      <section id="menu">
-        <Menu />
-      </section>
+            <div className="grid grid-cols-1 gap-4">
+              {[1, 2, 3].map((item) => (
+                <div key={item} className="border border-gold/20 p-4 rounded-lg">
+                  <h4 className="text-lg font-light mb-2">Signature Dish {item}</h4>
+                  <p className="text-gray font-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <p className="text-gold mt-2 font-light">$24</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </DevicePreview>
 
-      {/* Sticky Section */}
-      <StickySection items={stickyItems} title="Our Philosophy" />
+        <OurStory />
 
-      <Banner
-        title="Craft Cocktails, Unforgettable Memories"
-        image="/placeholder.svg?height=800&width=1600"
-        alt="Bartender preparing craft cocktails"
-      />
+        <Banner
+          title="Fresh Ingredients, Exceptional Flavors"
+          image="/placeholder.svg?height=800&width=1600"
+          alt="Fresh ingredients on a wooden table"
+        />
 
-      <section id="gallery">
-        <Gallery />
-      </section>
+        <section id="menu">
+          <Menu />
+        </section>
 
-      <section id="reservations">
-        <Reservations />
-      </section>
+        {/* Sticky Section */}
+        <StickySection items={stickyItems} title="Our Philosophy" />
 
-      <Contact />
-      <Footer />
-    </main>
+        <Banner
+          title="Craft Cocktails, Unforgettable Memories"
+          image="/placeholder.svg?height=800&width=1600"
+          alt="Bartender preparing craft cocktails"
+        />
+
+        <section id="gallery">
+          <Gallery />
+        </section>
+
+        <section id="reservations">
+          <Reservations />
+        </section>
+
+        <Contact />
+        <Footer />
+      </main>
+    </ClientOnly>
   )
 }
